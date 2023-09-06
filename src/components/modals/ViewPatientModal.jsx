@@ -33,6 +33,24 @@ const ViewPatientModal = ({ visible, onClose }) => {
           <h2 className="text-2xl font-semibold">Patient Details</h2>
         </div>
         <div className="modal-content p-4">
+          <div className="flex mb-4">
+            <div className="w-1/4">
+              <p className="font-semibold">Name:</p>
+              <p className="mt-1">John Doe</p>
+            </div>
+            <div className="w-1/4">
+              <p className="font-semibold">Email:</p>
+              <p className="mt-1">johndoe@example.com</p>
+            </div>
+            <div className="w-1/4">
+              <p className="font-semibold">Phone Number:</p>
+              <p className="mt-1">123-456-7890</p>
+            </div>
+            <div className="w-1/4">
+              <p className="font-semibold">Address:</p>
+              <p className="mt-1">123 Main St, City, State</p>
+            </div>
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full table-auto">
               <thead>

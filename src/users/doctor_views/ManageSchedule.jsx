@@ -1,69 +1,74 @@
 import React, { useState } from "react";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Tracker";
+import Tracker from "../../components/Tracker";
+import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import SelectDateModal from "../../components/modals/SelectDate";
 
-const ManageSchedule = () => {
-  const [availability, setAvailability] = useState([
-    { day: "Monday", time: "" },
-    { day: "Tuesday", time: "" },
-    { day: "Wednesday", time: "" },
-    { day: "Thursday", time: "" },
-    { day: "Friday", time: "" },
-    { day: "Saturday", time: "" },
-    { day: "Sunday", time: "" },
-  ]);
+const localizer = momentLocalizer(moment);
 
-  const updateAvailability = (day, time) => {
-    const updatedAvailability = availability.map((slot) =>
-      slot.day === day ? { ...slot, time } : slot
-    );
-    setAvailability(updatedAvailability);
-  };
+function ManageSchedule() {
+  const [showSelectDateModal, setShowSelectDateModal] = useState(false);
+  const handleOnClose = () => setShowSelectDateModal(false);
+
+  const events = [
+    // Add your events here
+    {
+      title: "8:00 AM - 5:00 PM",
+      start: new Date(2023, 8, 11), // September 1, 2023
+      end: new Date(2023, 8, 11), // September 3, 2023
+    },
+    {
+      title: "8:00 AM - 5:00 PM",
+      start: new Date(2023, 8, 12), // September 1, 2023
+      end: new Date(2023, 8, 12), // September 3, 2023
+    },
+    {
+      title: "8:00 AM - 5:00 PM",
+      start: new Date(2023, 8, 13), // September 1, 2023
+      end: new Date(2023, 8, 13), // September 3, 2023
+    },
+    {
+      title: "8:00 AM - 5:00 PM",
+      start: new Date(2023, 8, 14), // September 1, 2023
+      end: new Date(2023, 8, 14), // September 3, 2023
+    },
+    {
+      title: "8:00 AM - 5:00 PM",
+      start: new Date(2023, 8, 15), // September 1, 2023
+      end: new Date(2023, 8, 15), // September 3, 2023
+    },
+  ];
 
   return (
-    <>
-      <div className="bg-slate-300 min-h-screen">
-        <Navbar />
-        <div className="flex">
-          <Sidebar />
-          <div className="bg-white flex-1 mt-2 mr-2 rounded-md p-4">
-            <div>
-              <h1 className="text-center text-2xl font-bold">
-                Doctor's Availability
-              </h1>
-            </div>
-            <div className="mt-8">
-              <table className="w-full border">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="border p-2">Day</th>
-                    <th className="border p-2">Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {availability.map((slot) => (
-                    <tr key={slot.day}>
-                      <td className="border text-center p-2">{slot.day}</td>
-                      <td className="border text-center p-2">
-                        <input
-                          type="text"
-                          value={slot.time}
-                          onChange={(e) =>
-                            updateAvailability(slot.day, e.target.value)
-                          }
-                          className="border rounded px-2 py-1 w-full"
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+    <div className="min-h-screen flex flex-col bg-slate-300">
+      <Navbar />
+      <div className="flex flex-1">
+        <Tracker />
+        <div className="bg-white flex-1 mt-2 mr-2 rounded-md p-4">
+          <div>
+            <h1 className="text-center text-2xl font-bold">
+              Manage Availability
+            </h1>
+          </div>
+          <div className="flex-1 h-full" onClick={() => setShowSelectDateModal(true)} >
+            <BigCalendar
+              localizer={localizer}
+              events={events}
+              defaultView="month"
+              toolbar={false}
+              views={["month"]} // Include 'week' view
+            />
           </div>
         </div>
       </div>
-    </>
+      <SelectDateModal
+        onClose={handleOnClose}
+        visible={showSelectDateModal}
+      />
+    </div>
   );
-};
+}
 
 export default ManageSchedule;
