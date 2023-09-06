@@ -18,11 +18,14 @@ import DocRequest from "./users/doctor_views/DocRequest"
 import DocHistory from "./users/doctor_views/DocHistory"
 import DocSchedule from "./users/doctor_views/DocSchedule"
 import ManageSchedule from "./users/doctor_views/ManageSchedule"
+import Login from "./users/Login"
 
 function App() {
   return (
     <> 
       <Routes>
+
+        <Route path="/" element={<Login/>}/>
 
         {/**Doctor Routes */}
         <Route path={"/doctor"} element={<DocRequest/>}/>

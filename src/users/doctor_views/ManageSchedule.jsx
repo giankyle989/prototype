@@ -49,7 +49,7 @@ function ManageSchedule() {
         <div className="bg-white flex-1 mt-2 mr-2 rounded-md p-4">
           <div>
             <h1 className="text-center text-2xl font-bold">
-              Manage Availability
+              September 2023
             </h1>
           </div>
           <div className="flex-1 h-full" onClick={() => setShowSelectDateModal(true)} >
